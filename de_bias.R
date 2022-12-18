@@ -2,8 +2,8 @@
 #' 
 #' X0: This is a matrix of feature values for the control group.
 #' X1: This is a matrix of feature values for the treatment group.
-#' Y: This is a vector of values that we want to predict using the feature matrices X_0 and X_1.
-#' D: This is a binary vector indicating membership in one of the two groups represented by X_0 and X_1.
+#' Y: This is a vector of values that we want to predict using the feature matrices X0 and X1.
+#' D: This is a binary vector indicating membership in one of the two groups represented by X0 and X1.
 #' weights: This is a n1 x n0 matrix of weights that will be used to adjust the predicted values.
 
 de_bias <- function(X0, X1, Y, D, weights){
