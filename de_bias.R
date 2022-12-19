@@ -8,7 +8,7 @@
 
 de_bias <- function(X0, X1, Y, D, W){
   
-  # Check that input matrices and vectors have the correct dimensions
+  # Adding some checks
   if (!is.matrix(X0) || !is.matrix(X1) || !is.matrix(Y) || !is.vector(D)) {
     stop("Inputs must be matrices and D must be a vector")
   }
@@ -19,11 +19,11 @@ de_bias <- function(X0, X1, Y, D, W){
     stop("D must have the same length as the total number of columns in X0 and X1")
   }
   
-  # Create augmented feature matrices by setting the last element of each column to 1
+  # Creating augmented feature matrices by setting the last element of each column to 1
   augmented_X0 <- cbind(X0, rep(1, ncol(X0)))
   augmented_X1 <- cbind(X1, rep(1, ncol(X1)))
   
-  # Calculate the weight matrix using the inverse of the transpose of augmented_X0 multiplied by augmented_X_0
+  # Calculating the weight matrix using the inverse of the transpose of augmented_X0 multiplied by augmented_X_0
   weight_matrix <- tryCatch(
     solve(t(augmented_X0) %*% augmented_X0) %*% augmented_X0,
     error = function(e) {
@@ -32,12 +32,10 @@ de_bias <- function(X0, X1, Y, D, W){
     }
   )
   
-  # Vectorize the calculation of bias
+  # Pre-allocating dbias and calculating it
   dbias = matrix(nrow=nrow(Y),ncol=ncol(X1))
-  for(t in 1:nrow(Y)){
-  mean0 <- weight_matrix %*% Y[D==0]
-  dbias[t,] <- t(augmented_X1) %*% mean0 - W %*% (t(augmented_X0) %*% mean0)
-  }
+  mean0 <- weight_matrix %*% Y[,D==0]
+  dbias <- t(augmented_X1) %*% mean0 - W %*% (t(augmented_X0) %*% mean0)
   
   return(dbias)
 }
