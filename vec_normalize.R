@@ -6,7 +6,7 @@
 #' X1: A (k x n1) matrix of observables of the treatment group.
 
 
-normalize <- function(X0, X1){
+vec_normalize <- function(X0, X1){
   # Adding some checks
   if (!is.matrix(X0) && !is.data.frame(X0)) {
     stop("X0 must be a matrix or data frame")
