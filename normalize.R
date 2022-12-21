@@ -31,5 +31,5 @@ normalize <- function(X0, X1){
   X0_norm <- t(t(X0) %*% ( 1/variance * diag(rep(nVar, 1)) ))
   X1_norm <- t(t(X1) %*% ( 1/variance * diag(rep(nVar, 1)) ))
   
-  return(list(X0_norm, X1_norm))
+  return(X0_norm, X1_norm)
 }
