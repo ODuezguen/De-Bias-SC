@@ -30,9 +30,6 @@ normalize <- function(X0, X1){
 
   X0_norm <- t(t(X0) %*% ( 1/variance * diag(rep(nVar, 1)) ))
   X1_norm <- t(t(X1) %*% ( 1/variance * diag(rep(nVar, 1)) ))
-  if(is.vector(X0_norm)==TRUE) {
-    X0_norm <- t(as.matrix(X0_norm))
-  }
   
   return(list(X0_norm, X1_norm))
 }
