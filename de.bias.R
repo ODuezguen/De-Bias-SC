@@ -1,12 +1,16 @@
-#' This function calculates the bias term given the inputs:
+#' This function calculates the bias term given the following inputs:
 #' 
-#' X0: This is a (k x n0) matrix of feature values for the control group.
-#' X1: This is a (k x n1) matrix of feature values for the treatment group.
-#' Y: This is a (T x n1+n0) matrix of values that we want to predict using the feature matrices X0 and X1.
-#' D: This is a binary vector of length (n1+n0) indicating membership in one of the two groups.
-#' W: This is a (n1 x n0) matrix of weights that will be used to adjust the predicted values.
+#' @params X0: This is a (k x n0) matrix of feature values for the control group.
+#' @params X1: This is a (k x n1) matrix of feature values for the treatment group.
+#' @params Y: This is a (T x n1+n0) matrix of values that we want to predict using the feature matrices X0 and X1.
+#' @params D: This is a binary vector of length (n1+n0) indicating membership in one of the two groups.
+#' @params W: This is a (n1 x n0) matrix of weights that will be used to adjust the predicted values.
+#'
+#' @return It returns the bias of the aggregated synthetic control (see Abadie and L'Hour (2021) for more details)
+#'
+#' @author Onur Düzgün
 
-de_bias <- function(X0, X1, Y, D, W){
+de.bias <- function(X0, X1, Y, D, W){
   
   # Adding some checks
   if (!is.matrix(X0) || !is.matrix(X1) || !is.matrix(Y) || !is.vector(D)) {
