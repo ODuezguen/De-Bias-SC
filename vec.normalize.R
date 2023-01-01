@@ -10,7 +10,7 @@
 #' @author Onur Düzgün
 
 
-vec_normalize <- function(X0, X1){
+vec.normalize <- function(X0, X1){
   # Adding some checks
   if (!is.matrix(X0) && !is.data.frame(X0)) {
     stop("X0 must be a matrix or data frame")
