@@ -1,9 +1,13 @@
-#' This function takes X0 and X1 and returns two normalized matrices by dividing the elements in X0 and X1 by the square root of their row variances. 
+#' This function takes X0 and X1 and divides the elements by the square root of their row variances. 
 #' Remember: to normalize a vector, you divide each element by the square root of the sum of the squares.
 #' The function also includes checks and error handling.
 #'
-#' X0: A (k x n0) matrix of observables of the control group.
-#' X1: A (k x n1) matrix of observables of the treatment group.
+#' @params X0: A (k x n0) matrix of observables of the control group.
+#' @params X1: A (k x n1) matrix of observables of the treatment group.
+#'
+#' @return It returns two normalized matrices
+#'
+#' @author Onur Düzgün
 
 
 vec_normalize <- function(X0, X1){
@@ -23,13 +27,13 @@ vec_normalize <- function(X0, X1){
   combined_X <- cbind(X0, X1)
   variance <- sqrt(diag(cov(combined_X)))
   
-  # Handle cases where the variance is zero
+  # Handling cases where the variance is zero
   if (any(variance == 0)) {
-    stop("The variance of one or more rows is zero. Cannot normalize data. Note: all variables must be time-varying.")
+    stop("Cannot normalize data. The variance of one or more rows is zero. Note: all variables must be time-varying.")
   }
 
-  X0_norm <- t(t(X0) %*% ( 1/variance * diag(rep(nVar, 1)) ))
-  X1_norm <- t(t(X1) %*% ( 1/variance * diag(rep(nVar, 1)) ))
+  X0_norm <- t(t(X0) %*% (1/variance * diag(rep(nVar,1))))
+  X1_norm <- t(t(X1) %*% (1/variance * diag(rep(nVar,1))))
   
   return(X0_norm, X1_norm)
 }
